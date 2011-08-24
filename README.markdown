@@ -1,7 +1,7 @@
-Docbook Document
-================
+Configuration Without the Bugs and Gymnastics
+=============================================
 
-A template from which to create a Docbook document.
+Slides for a talk on the reader monad.
 
 Setting up
 ==========
