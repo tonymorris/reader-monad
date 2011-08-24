@@ -6,9 +6,16 @@
                "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2001/XInclude'">
 ]>
 
-<article id="DocbookDocument" xmlns:xi="http://www.w3.org/2001/XInclude">
+<article id="ReaderMonad" xmlns:xi="http://www.w3.org/2001/XInclude">
   <xi:include href="articleinfo.xml"/>
   <xi:include href="introduction.xml"/>
+  <xi:include href="configurigour.xml"/>
+  <xi:include href="reader.xml"/>
+  <xi:include href="usecase.xml"/>
+  <xi:include href="ReaderMonad.xml"/>
+  <xi:include href="ConfigReader.scala.xml"/>
+  <xi:include href="CompilableExample.scala.xml"/>
+  <xi:include href="CompilableExample.hs.xml"/>
   <xi:include href="PGPKEY.xml"/>
   <xi:include href="CC-BY-SA.xml"/>
 </article>

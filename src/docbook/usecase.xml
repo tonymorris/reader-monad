@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<sect1>
+  <title>Use-Case</title>
+  <sect2>
+    <title>Squiggles and Swizzles and Things</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Suppose we have a function that accepts three arguments:
+          <itemizedlist>
+            <listitem>
+              <para>
+                a <code>Squiggle</code>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                a <code>Swizzle</code>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                a <code>Things</code>
+              </para>
+            </listitem>
+          </itemizedlist>
+          This function should return a <code>Spickle</code>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <code>Squiggle => Swizzle => Things => Spickle</code>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          However, in order to compute the argument values, they need access to the <code>Configuration</code> but we want to avoid clumsy!
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <code>ConfigReader[Squiggle] => ConfigReader[Swizzle] => ConfigReader[Things] => ConfigReader[Spickle]</code>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  <sect2>
+    <title>Clarity</title>
+    <itemizedlist>
+      <listitem>
+        <para>Let's clarify the problem a little.</para>
+      </listitem>
+      <listitem>
+        <para>
+          We want a 3-argument function that is <emphasis>lifted</emphasis> into a <code>ConfigReader</code>, but we want it to <emphasis>automatically</emphasis> handle the access to <code>Configuration</code>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <code>(A => B => C => D) => (ConfigReader[A] => ConfigReader[B] => ConfigReader[C] => ConfigReader[D])</code>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  <sect2>
+    <title>Let's write it!</title>
+    <programlisting>
+def lift3ConfigReader[A, B, C, D](f: A => B => C => D):
+  ConfigReader[A] =>
+  ConfigReader[B] =>
+  ConfigReader[C] =>
+  ConfigReader[D] =
+    a => b => c =>
+      a flatMap (aa =>
+      b flatMap (bb =>
+      c map     (cc =>
+      f(aa)(bb)(cc))))</programlisting>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Now we can pass in our function that deals with simple values, yet we can have them automatically computed with the <code>Configuration</code>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Those <code>flatMap</code> and <code>map</code> functions look darn handy.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  <sect2>
+    <title>Handy indeed</title>
+    <para>
+      Scala has syntactic support for calling these methods implicitly.
+    </para>
+    <programlisting>
+def lift3ConfigReader[A, B, C, D](f: A => B => C => D):
+  ConfigReader[A] =>
+  ConfigReader[B] =>
+  ConfigReader[C] =>
+  ConfigReader[D] =
+    a => b => c =>
+      for{
+        aa &lt;- a
+        bb &lt;- b
+        cc &lt;- c
+      } yield f(aa)(bb)(cc)</programlisting>
+    <para>
+      Notice how we are treating unwrapped values, yet they can in fact access the <code>Configuration</code>.
+    </para>
+  </sect2>
+  <sect2>
+    <title>Even C# has it!</title>
+    <para>
+      Even a very popular programming language has this syntactic support.
+    </para>
+    <programlisting>
+from aa in a
+from bb in b
+from cc in c
+select f(a, b, c)</programlisting>
+    <para>
+      Microsoft calls this <emphasis>LINQ</emphasis>. Scala calls it <emphasis>for-comprehensions</emphasis>. Programmers call it <emphasis>monad-comprehensions</emphasis>.
+    </para>
+  </sect2>
+</sect1>

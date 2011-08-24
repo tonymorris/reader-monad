@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<appendix id="ConfigReader.scala">
+  <title>ConfigReader.scala</title>
+  <programlisting>
+abstract class ConfigReader[A] {
+  def apply(config: Configuration): A
+
+  def map[B](f: A => B): ConfigReader[B] =
+    new ConfigReader[B] {
+      def apply(c: Configuration) =
+        f(ConfigReader.this.apply(c))
+    }
+
+  def flatMap[B](f: A => ConfigReader[B]): ConfigReader[B] =
+    new ConfigReader[B] {
+      def apply(c: Configuration) =
+        f(ConfigReader.this.apply(c))(c)
+    }
+}</programlisting>
+</appendix>

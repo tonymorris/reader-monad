@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<appendix id="CompilableExample.hs">
+  <title>CompilableExample.hs</title>
+  <programlisting>
+data Configuration = Configuration {
+  hostname :: String
+, port :: Int
+, outfile :: String
+}
+
+data ConfigReader a = ConfigReader {
+  apply :: Configuration -> a
+}
+
+instance Functor ConfigReader where
+  fmap f (ConfigReader k) = ConfigReader (f . k)
+
+instance Monad ConfigReader where
+  return = ConfigReader . const
+  ConfigReader k >>= f = ConfigReader (\c -> f (k c) `apply` c)
+
+lift3ConfigReader ::
+  (a -> b -> c -> d)
+  -> ConfigReader a
+  -> ConfigReader b
+  -> ConfigReader c
+  -> ConfigReader d
+lift3ConfigReader f a b c =
+  do aa &lt;- a
+     bb &lt;- b
+     cc &lt;- c
+     return (f aa bb cc)</programlisting>
+</appendix>

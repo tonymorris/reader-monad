@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<sect1>
+  <title>Reader Monad</title>
+  <itemizedlist>
+    <listitem>
+      <para>
+        You have just witnessed one of many practical applications of <emphasis>the Reader Monad</emphasis>.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        There are many more applications and use-cases.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        There are many more monads with other applications and use-cases. So inherent to every-day programming that various programming languages provide syntactic support for it.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Open, skeptical minds are healthy minds.
+      </para>
+    </listitem>
+  </itemizedlist>
+</sect1>

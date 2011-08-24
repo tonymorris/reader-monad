@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<appendix id="CompilableExample.scala">
+  <title>CompilableExample.scala</title>
+  <programlisting>
+case class Configuration(
+  hostname: String
+, port: Int
+, outfile: String
+)
+
+abstract class ConfigReader[A] {
+  def apply(config: Configuration): A
+
+  def map[B](f: A => B): ConfigReader[B] =
+    new ConfigReader[B] {
+      def apply(c: Configuration) =
+        f(ConfigReader.this.apply(c))
+    }
+
+  def flatMap[B](f: A => ConfigReader[B]): ConfigReader[B] =
+    new ConfigReader[B] {
+      def apply(c: Configuration) =
+        f(ConfigReader.this.apply(c))(c)
+    }
+}
+
+object ConfigReader {
+  def lift3ConfigReader[A, B, C, D](f: A => B => C => D):
+    ConfigReader[A] =>
+    ConfigReader[B] =>
+    ConfigReader[C] =>
+    ConfigReader[D] =
+      a => b => c =>
+        for{
+          aa &lt;- a
+          bb &lt;- b
+          cc &lt;- c
+        } yield f(aa)(bb)(cc)
+}</programlisting>
+</appendix>

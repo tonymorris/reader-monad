@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<sect1>
+  <title>Reader</title>
+  <sect2>
+    <title>Reader Data Structure</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Suppose some configuration
+          <programlisting>
+case class Configuration(
+  hostname: String
+, port: Int
+, outfile: String
+)</programlisting>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Values that are computed with the configuration (mnemonic: they <emphasis>read</emphasis> the configuration) can be denoted by an interface.
+          <programlisting>
+abstract class ConfigReader[A] {
+  def apply(config: Configuration): A
+}</programlisting>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  <sect2>
+    <title>Handy Bits</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          A couple of useful functions<footnote>
+          <para>
+            We will soon see why they are useful
+          </para>
+          </footnote>
+          <itemizedlist>
+            <listitem>
+              <para>
+                <code>(A => B) => ConfigReader[A] => ConfigReader[B]</code>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <code>(A => ConfigReader[B]) => ConfigReader[A] => ConfigReader[B]</code>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                These functions can be implemented as methods <xref linkend="ConfigReader.scala"/>.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+</sect1>

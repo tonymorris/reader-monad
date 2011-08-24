@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<sect1>
+  <title>Configurigour</title>
+  <sect2>
+    <title>Gymnastics</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Applications sometimes require configuration to alter their behaviour.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          This gives rise to a number of issues.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          I have seen various <emphasis role="bold">gymnastics</emphasis> to attempt to alleviate this.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  <sect2>
+    <title>Bugs</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Let's put the configuration in a <emphasis>once-set widely-scoped variable</emphasis> and all functions requiring access to it, automatically do so.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          But this leads to bugs and code that is difficult to read and maintain.<footnote>
+            <para>
+              As is usual for widely-scoped, write-at-least-once values.
+            </para>
+          </footnote>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          OK then, no variables!
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  <sect2>
+    <title>Clumsy</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Let's pass the configuration to every function that requires it, including those for which it is simply passed on.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          But this is clumsy and requires redundancy.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Even intuitively, we might suspect that there is a cleaner way of doing this without the clumsies and without the variables.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Can we configure with rigour?
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+</sect1>

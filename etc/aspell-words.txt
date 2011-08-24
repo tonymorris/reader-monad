@@ -1,12 +1,17 @@
-personal_ws-1.1 en 28 
+personal_ws-1.1 en 38 
 organization
 waivable
 AUTHORIZED
+CompilableExample
+monad
 synching
 Ssection
+ConfigReader
+Configurigour
 phonogram
 sublicense
 Docbook
+scala
 recognizably
 Licence
 ShareAlike
@@ -15,11 +20,15 @@ pre
 NONINFRINGEMENT
 utilizing
 Unported
+clumsies
+monads
 PGP
 Licensor's
 honor
 dramatico
+LINQ
 MERCHANTIBILITY
+skeptical
 CCPL
 relicensing
 WIPO
@@ -27,3 +36,4 @@ synchronization
 Licensor
 Berne
 phonograms
+hs
